@@ -52,6 +52,7 @@ public class MainActivity extends Activity {
             }
 
             public void onPageFinished(WebView view, String url) {
+
                 Log.i(TAG, "Finished loading URL: " +url);
 
                 if (progressBar.isShowing()) {
@@ -60,18 +61,23 @@ public class MainActivity extends Activity {
             }
 
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+
                 Log.e(TAG, "Error: " + description);
-                Toast.makeText(getApplicationContext(), "Oh no! " + description, Toast.LENGTH_SHORT).show();
+
+                // showing an Alert Dialog
                 alertDialog.setTitle("Error");
                 alertDialog.setMessage(description);
-                alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+                alertDialog.setButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        return;
+                        dialog.dismiss();
                     }
                 });
                 alertDialog.show();
             }
         });
+
+        // Loading URL into WebView
         webview.loadUrl("http://muktopaath.gov.bd/login/auth");
     }
 
